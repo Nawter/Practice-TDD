@@ -18,7 +18,6 @@ public class SellOneItemTest {
     }
 
     @Test
-    @Ignore("Refactoring..........")
     public void anotherProductFound() throws Exception {
         final Display display=new Display();
         final Sale sale= new Sale(display);
@@ -45,7 +44,14 @@ public class SellOneItemTest {
             this.display = display;
         }
         public void onBarcode(String barcode) {
-            display.setText("$7.95");
+            if("12345".equals(barcode))
+            {
+                display.setText("$7.95");
+            }
+            else{
+                display.setText("$12.50");
+            }
+
         }
     }
 }
