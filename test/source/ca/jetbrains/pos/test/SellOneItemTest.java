@@ -25,14 +25,6 @@ public class SellOneItemTest {
         assertEquals("$12.50",display.getText());
     }
 
-    @Test
-    public void productNotFound() throws Exception {
-        final Display display=new Display();
-        final Sale sale= new Sale(display);
-        sale.onBarcode("99999");
-        assertEquals("Product not found for 99999",display.getText());
-    }
-
     public static class Display {
 
         private String text;
@@ -60,8 +52,11 @@ public class SellOneItemTest {
             {
                 display.setText("$12.50");
             }
+<<<<<<< HEAD
             else
                 display.setText("Product not found for 99999");
+=======
+>>>>>>> parent of 5f77e55... We can handle not finding a product, but only if its barcode is 99999.
 
         }
     }
