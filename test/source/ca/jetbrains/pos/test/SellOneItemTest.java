@@ -3,6 +3,9 @@ package ca.jetbrains.pos.test;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -65,10 +68,15 @@ public class SellOneItemTest {
             }
             else
             {
+                // introduce lookup table
+                final Map<String, String> pricesByBarcode = new HashMap<String, String>() {{
+                    put("12345","$7.95");
+                    put("54321","$12.50");
+                }};
                 if ("12345".equals(barcode)) {
-                    display.setText("$7.95");
+                    display.setText(pricesByBarcode.get("12345"));
                 } else if ("54321".equals(barcode)) {
-                    display.setText("$12.50");
+                    display.setText(pricesByBarcode.get("54321"));
                 } else
                     display.setText("Product not found for " +
                             barcode);
