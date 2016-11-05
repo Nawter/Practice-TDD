@@ -66,16 +66,14 @@ public class SellOneItemTest {
             if ("".equals(barcode)){
                 display.setText("Scanning error: empty barcode");
             }
-            else
+            elses
             {
                 // introduce lookup table
                 final Map<String, String> pricesByBarcode = new HashMap<String, String>() {{
                     put("12345","$7.95");
                     put("54321","$12.50");
                 }};
-                if ("12345".equals(barcode)) {
-                    display.setText(pricesByBarcode.get(barcode));
-                } else if ("54321".equals(barcode)) {
+                if (pricesByBarcode.containsKey(barcode)) {
                     display.setText(pricesByBarcode.get(barcode));
                 } else
                     display.setText("Product not found for " +
