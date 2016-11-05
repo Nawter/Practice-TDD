@@ -2,8 +2,10 @@ package ca.jetbrains.pos.test;
 
 import org.junit.Test;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.StringJoiner;
 
 import static org.junit.Assert.assertEquals;
 
@@ -47,10 +49,7 @@ public class SellOneItemTest {
     @Test
     public void emptyBarcode() throws Exception {
         final Display display = new Display();
-        final Sale sale = new Sale(display, new HashMap<String, String>() {{
-            put("12345", "$7.95");
-            put("54321", "$12.50");
-        }});
+        final Sale sale = new Sale(display, Collections.<String,String> emptyMap());
         sale.onBarcode("");
         assertEquals("Scanning error: empty barcode", display.getText());
     }
@@ -76,8 +75,9 @@ public class SellOneItemTest {
             this.display = display;
             this.pricesByBarcode = pricesByBarcode;
         }
-        
+
         public void onBarcode(String barcode) {
+        // SMELL Refused bequest; move this up the call stack?
             if ("".equals(barcode)) {
                 display.setText("Scanning error: empty barcode");
                 return;
