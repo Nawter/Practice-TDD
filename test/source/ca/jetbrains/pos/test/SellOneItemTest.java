@@ -59,20 +59,21 @@ public class SellOneItemTest {
 
     public static class Sale {
         private Display display;
+        private Map<String, String> pricesByBarcode;
+
         public Sale(Display display) {
             this.display = display;
+            this.pricesByBarcode = new HashMap<String, String>() {{
+                put("12345","$7.95");
+                put("54321","$12.50");
+            }};
         }
         public void onBarcode(String barcode) {
             if ("".equals(barcode)){
                 display.setText("Scanning error: empty barcode");
             }
-            elses
+            else
             {
-                // introduce lookup table
-                final Map<String, String> pricesByBarcode = new HashMap<String, String>() {{
-                    put("12345","$7.95");
-                    put("54321","$12.50");
-                }};
                 if (pricesByBarcode.containsKey(barcode)) {
                     display.setText(pricesByBarcode.get(barcode));
                 } else
