@@ -13,41 +13,41 @@ import static org.junit.Assert.assertEquals;
 public class SellOneItemTest {
     @Test
     public void productFound() throws Exception {
-        final Display display=new Display();
-        final Sale sale= new Sale(display, new HashMap<String, String>() {{
+        final Display display = new Display();
+        final Sale sale = new Sale(display, new HashMap<String, String>() {{
             put("12345", "$7.95");
             put("54321", "$12.50");
         }});
         sale.onBarcode("12345");
-        assertEquals("$7.95",display.getText());
+        assertEquals("$7.95", display.getText());
     }
 
     @Test
     public void anotherProductFound() throws Exception {
-        final Display display=new Display();
-        final Sale sale= new Sale(display, new HashMap<String, String>() {{
+        final Display display = new Display();
+        final Sale sale = new Sale(display, new HashMap<String, String>() {{
             put("12345", "$7.95");
             put("54321", "$12.50");
         }});
         sale.onBarcode("54321");
-        assertEquals("$12.50",display.getText());
+        assertEquals("$12.50", display.getText());
     }
 
     @Test
     public void productNotFound() throws Exception {
-        final Display display=new Display();
-        final Sale sale= new Sale(display, new HashMap<String, String>() {{
+        final Display display = new Display();
+        final Sale sale = new Sale(display, new HashMap<String, String>() {{
             put("12345", "$7.95");
             put("54321", "$12.50");
         }});
         sale.onBarcode("99999");
-        assertEquals("Product not found for 99999",display.getText());
+        assertEquals("Product not found for 99999", display.getText());
     }
 
     @Test
     public void emptyBarcode() throws Exception {
-        final Display display=new Display();
-        final Sale sale= new Sale(display, new HashMap<String, String>() {{
+        final Display display = new Display();
+        final Sale sale = new Sale(display, new HashMap<String, String>() {{
             put("12345", "$7.95");
             put("54321", "$12.50");
         }});
@@ -76,19 +76,17 @@ public class SellOneItemTest {
             this.display = display;
             this.pricesByBarcode = pricesByBarcode;
         }
+        
         public void onBarcode(String barcode) {
-            if ("".equals(barcode)){
+            if ("".equals(barcode)) {
                 display.setText("Scanning error: empty barcode");
+                return;
             }
-            else
-            {
-                if (pricesByBarcode.containsKey(barcode)) {
-                    display.setText(pricesByBarcode.get(barcode));
-                } else
-                    display.setText("Product not found for " +
-                            barcode);
-            }
-
+            if (pricesByBarcode.containsKey(barcode)) {
+                display.setText(pricesByBarcode.get(barcode));
+            } else
+                display.setText("Product not found for " +
+                        barcode);
         }
     }
 }
