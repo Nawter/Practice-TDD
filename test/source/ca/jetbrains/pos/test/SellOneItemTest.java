@@ -61,7 +61,7 @@ public class SellOneItemTest {
                 display.setText("$12.50");
             }
             else
-                display.setText("Product not found for 99999    ");
+                display.setText("Product not found for 99999");
 
         }
     }
