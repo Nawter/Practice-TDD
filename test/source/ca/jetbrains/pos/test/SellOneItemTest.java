@@ -48,7 +48,8 @@ public class SellOneItemTest {
             {
                 display.setText("$7.95");
             }
-            else{
+            else if ("54321".equals(barcode))
+            {
                 display.setText("$12.50");
             }
 
